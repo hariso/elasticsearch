@@ -74,6 +74,7 @@ import org.elasticsearch.common.xcontent.XContentParser;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.VersionType;
 import org.elasticsearch.index.rankeval.RankEvalRequest;
+import org.elasticsearch.index.reindex.UpdateByQueryRequest;
 import org.elasticsearch.rest.action.search.RestSearchAction;
 import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 
@@ -479,6 +480,10 @@ public final class Request {
 
         HttpEntity entity = createEntity(updateRequest, xContentType);
         return new Request(HttpPost.METHOD_NAME, endpoint, parameters.getParams(), entity);
+    }
+
+    static Request updateByQuery(UpdateByQueryRequest updateRequest) {
+        return null;
     }
 
     static Request search(SearchRequest searchRequest) throws IOException {

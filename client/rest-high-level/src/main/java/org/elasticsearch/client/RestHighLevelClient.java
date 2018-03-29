@@ -57,6 +57,7 @@ import org.elasticsearch.common.xcontent.XContentParser;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.rankeval.RankEvalRequest;
 import org.elasticsearch.index.rankeval.RankEvalResponse;
+import org.elasticsearch.index.reindex.UpdateByQueryRequest;
 import org.elasticsearch.plugins.spi.NamedXContentProvider;
 import org.elasticsearch.rest.BytesRestResponse;
 import org.elasticsearch.rest.RestStatus;
@@ -373,6 +374,15 @@ public class RestHighLevelClient implements Closeable {
      */
     public final void updateAsync(UpdateRequest updateRequest, ActionListener<UpdateResponse> listener, Header... headers) {
         performRequestAsyncAndParseEntity(updateRequest, Request::update, UpdateResponse::fromXContent, listener, emptySet(), headers);
+    }
+
+    /**
+     * Updates a set of documents using the Update By Query API
+     * <p>
+     * See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">Update By Query API on elastic.co</a>
+     */
+    public final UpdateResponse updateByQuery(UpdateByQueryRequest updateRequest, Header... headers) throws IOException {
+        return performRequestAndParseEntity(updateRequest, Request::updateByQuery, UpdateResponse::fromXContent, emptySet(), headers);
     }
 
     /**
